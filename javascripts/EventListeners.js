@@ -34,7 +34,13 @@ var Music = (function(List) {
 			}
 		}, 
 		deleteSongs: function() {
-			console.log("you clicked: ", event.target);
+			if (event.target.classList.contains("song-delete")) {
+				let mainContent = document.getElementById("main-content");
+				mainContent.removeChild(event.target.parentNode);	
+			}
+		}, 
+		uploadSecondJson: function() {
+			Music.populateUserList("myMusic2");
 		}
 	};
 

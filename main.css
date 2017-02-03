@@ -164,9 +164,11 @@ li > a {
 
 /*====MORE BUTTON====*/
 #more {
-	width: 100%;
-	margin: 0 15% 1em 0;
+	width: 90%;
+	margin: 1em 15% 1em 0;
+	padding-left: 1em;
 	text-align: right;
+	bottom: 0;
 }
 
 
@@ -185,28 +187,39 @@ li > a {
 }
 
 
-.songContainer {
-	width: 80%;
-	margin: 0 auto;
-	padding: 2em;
+.song-container {
+	width: 90%;
+	margin: auto;
+	padding: 1em;
+	padding-right: 0;
 	border-bottom: 1px solid black;
 }
 
-.songContainer:last-child {
+.song-delete {
+	display: inline-block;
+	float: right;
+}
+
+.content-wrapper {
+	display: inline-block;
+	width: 80%;
+}
+
+.content-wrapper:last-child {
 	border-bottom: 0;
 }
 
-.songContainer > h2 {
+.content-wrapper > h2 {
 	color: #785616;
 }
 
-.songContainer > p {
+.content-wrapper > p {
 	display: inline-block;
 	padding-right: 1em;
 	padding-left: 1em;
 }
 
-.songContainer p:first-of-type {
+.content-wrapper p:first-of-type {
 	padding-left: 0;
 	border-right: 1px solid black;
 }

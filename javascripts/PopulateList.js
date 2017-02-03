@@ -19,17 +19,22 @@ var Music = (function(PopulateMusic) {
 	//===============================//
 
 
-	PopulateMusic.populateUserList = function(song) {
+	PopulateMusic.populateUserList = function(songs) {
 
-		var counter = Music.numOfSongsOnPage;
-		let songsToUpdate = Music.grabJson(dataName);
+		let songsToUpdate = Music.grabJson(songs);
 
 		for (var song = 0; song < songsToUpdate.length; song++) {
+
+			let currentSong = songsToUpdate[song];
+			var counter = Music.numOfSongsOnPage;
 	
-			let songStructure =   `<div class="songContainer">
-										<h2 id="song--${counter}">${song.title}</h2>
-										<p id="artist--${counter}">${song.artist}</p>
-										<p id="album--${counter}">${song.album}</p>
+			let songStructure =   `<div class="song-container">
+										<div class="content-wrapper">
+											<h2 id="song--${counter}">${currentSong.title}</h2>
+											<p id="artist--${counter}">${currentSong.artist}</p>
+											<p id="album--${counter}">${currentSong.album}</p>
+										</div>
+										<button class="song-delete">Delete</button>
 									</div>`;
 			Music.numOfSongsOnPage++;
 
