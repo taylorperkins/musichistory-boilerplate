@@ -24,7 +24,7 @@ var Music = (function(LoadJson) {
 			if (customVariable === "myMusic") {
 				myData[customVariable].push({album: "MuteMath", artist: "MuteMath", title: "Chaos"});
 				myData[customVariable].unshift({album: "NewBorn Sun", artist: "Chon", title: "Bubble Dream"});
-				Music.populateJsonList(customVariable);
+				Music.populateUserList(customVariable);
 			}
 		});
 		musicData.open("GET", fileName);

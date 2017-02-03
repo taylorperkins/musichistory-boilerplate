@@ -19,24 +19,22 @@ var Music = (function(PopulateMusic) {
 	//===============================//
 
 
-	PopulateMusic.populateUserList = function(song, counter) {
-	
-		let songStructure =   `<div class="songContainer">
-									<h2 id="song--${counter}">${song.title}</h2>
-									<p id="artist--${counter}">${song.artist}</p>
-									<p id="album--${counter}">${song.album}</p>
-								</div>`;
-		Music.numOfSongsOnPage++;
+	PopulateMusic.populateUserList = function(song) {
 
-		var mainContentWrapper = document.getElementById("main-content");
-		mainContentWrapper.innerHTML += songStructure;
-	};
-
-	PopulateMusic.populateJsonList = function(dataName) {
+		var counter = Music.numOfSongsOnPage;
 		let songsToUpdate = Music.grabJson(dataName);
 
 		for (var song = 0; song < songsToUpdate.length; song++) {
-			Music.populateUserList(songsToUpdate[song], Music.numOfSongsOnPage);
+	
+			let songStructure =   `<div class="songContainer">
+										<h2 id="song--${counter}">${song.title}</h2>
+										<p id="artist--${counter}">${song.artist}</p>
+										<p id="album--${counter}">${song.album}</p>
+									</div>`;
+			Music.numOfSongsOnPage++;
+
+			var mainContentWrapper = document.getElementById("main-content");
+			mainContentWrapper.innerHTML += songStructure;
 		}
 	};
 
