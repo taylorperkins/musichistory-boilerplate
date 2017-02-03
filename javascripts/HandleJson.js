@@ -8,36 +8,47 @@ var Music = (function(LoadJson) {
 	//===========JSON UPLOAD===========//
 	//=================================//
 
+	//Variable to store all Parsed Json Data Files
 	let myData = {};
-
-
-	let parseJSON = function(customVariable){
-		console.log("We have the data.");
-		myData[customVariable] = JSON.parse(event.currentTarget.responseText);
-		console.log(myData[customVariable], myData);
-	};
 	
+	//Creates XHR request for specified fileName. Pushes the retrieved JSON
+	//file to the parsJson function to be parsed and stored
+	//For the pre-determined song list, there is a separate functionality
+	//that adds two new songs to Json object before storing it
 	LoadJson.loadMusic = function(fileName, customVariable) {
-		let musicData = new XMLHttpRequest();
-		musicData.addEventListener("load", function(event) {
-			parseJSON(customVariable);
+
+		let updateMySongData = songList => {
+			console.log("done loading " + customVariable);
+			myData[customVariable] = songList;
+
 			if (customVariable === "myMusic") {
 				myData[customVariable].push({album: "MuteMath", artist: "MuteMath", title: "Chaos"});
 				myData[customVariable].unshift({album: "NewBorn Sun", artist: "Chon", title: "Bubble Dream"});
+				//sends Parsed data to populateUserList to be uploaded to 
+				//page
 				Music.populateUserList(customVariable);
 			}
-		});
-		musicData.open("GET", fileName);
-		musicData.send(); 
+		};
+
+		$.ajax({url:fileName})
+			.done(updateMySongData);
+
 	};
 
-	LoadJson.grabJson = function(dataName) {
-		return myData[dataName];
-	};
+	//Function to retrieve stored Json data
+	LoadJson.grabJson = dataName => myData[dataName];
 
 	return LoadJson;
 
 })(Music || {});
 
+//On load, specified Json files are sent to be parsed and stored with 
+//custom variable names
 window.onload = Music.loadMusic("../songs.json", "myMusic");
 window.onload = Music.loadMusic("../songs2.json", "myMusic2");
+
+
+
+
+
+

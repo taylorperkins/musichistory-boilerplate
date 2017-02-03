@@ -1,48 +1,43 @@
 "use strict";
 
+$("#add-page").hide();
 
 
 var Music = (function(List) {
-	List.connected = function() {
-		return "I am connected!";
-	};	
 
 	//===============================//
 	//===========VARIABLES===========//
 	//===============================//
 
-	var header = document.getElementById("nav-header");
+	//This function toggle between the List and Add Music pages
+	let updateHeader = headerName => {
+		if (headerName === "ADD") {
+			$("#add-page").show();
+			$("#list-page").hide();
+		} else if (headerName === "LIST") {
+			$("#list-page").show();
+			$("#add-page").hide();
+		}
+	};
+
+	//Attached to each delete button per individual music card
+	let deleteSongs = () => {
+		let target = $(event.target);
+		if (target.hasClass("song-delete")) {
+			target.parent().remove();	
+		}
+	};
+
+	//Attached to the "More >" button at the bottom of the 
+	//home page. Will retrieve pre-requested json file
+	let uploadSecondJson = () => Music.populateUserList("myMusic2");
 	
 	//===============================//
 	//===========FUNCTIONS===========//
 	//===============================//
 
-	List.eventListeners = {
-		populateHomePage: function() {
-			console.log("populate songs");
-			window.onload = Music.populateSongs;
-		},
-		updateHeader: function(headerName) {
-			var addPage = document.getElementById("add-page");
-			var homePage = document.getElementById("list-page");
-			if (headerName === "ADD") {
-				addPage.classList.toggle("hidden");
-				homePage.classList.toggle("hidden");
-			} else if (headerName === "LIST") {
-				homePage.classList.toggle("hidden");
-				addPage.classList.toggle("hidden");
-			}
-		}, 
-		deleteSongs: function() {
-			if (event.target.classList.contains("song-delete")) {
-				let mainContent = document.getElementById("main-content");
-				mainContent.removeChild(event.target.parentNode);	
-			}
-		}, 
-		uploadSecondJson: function() {
-			Music.populateUserList("myMusic2");
-		}
-	};
+	//Container for all functions used as event listeners
+	List.eventListeners = {updateHeader, deleteSongs, uploadSecondJson};
 
 	//============================//
 	//===========RETURN===========//
@@ -51,8 +46,6 @@ var Music = (function(List) {
 	return List;
 
 })(Music || {});
-
-Music.eventListeners.populateHomePage();
 
 
 
