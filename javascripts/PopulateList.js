@@ -32,23 +32,14 @@ var Music = (function(PopulateMusic) {
 		mainContentWrapper.innerHTML += songStructure;
 	};
 
-	PopulateMusic.populateJsonList = function() {
-		let songsToUpdate = Music.grabJson();
+	PopulateMusic.populateJsonList = function(dataName) {
+		let songsToUpdate = Music.grabJson(dataName);
 
-		console.log("You are about to populate");
-
-		let myMusic = songsToUpdate.myMusic;
-		console.log(myMusic);
-
-		var taylorSong1 = {album: "NewBorn Sun", artist: "Chon", title: "Bubble Dream"};
-		var taylorSong2 = {album: "MuteMath", artist: "MuteMath", title: "Chaos"};
-		myMusic.unshift(taylorSong1);
-		myMusic.push(taylorSong2);
-
-		for (var song = 0; song < myMusic.length; song++) {
-			Music.populateUserList(myMusic[song], Music.numOfSongsOnPage);
+		for (var song = 0; song < songsToUpdate.length; song++) {
+			Music.populateUserList(songsToUpdate[song], Music.numOfSongsOnPage);
 		}
 	};
+
 
 	//============================//
 	//===========RETURN===========//

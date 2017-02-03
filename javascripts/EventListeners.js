@@ -32,6 +32,9 @@ var Music = (function(List) {
 				homePage.classList.toggle("hidden");
 				addPage.classList.toggle("hidden");
 			}
+		}, 
+		deleteSongs: function() {
+			console.log("you clicked: ", event.target);
 		}
 	};
 
